@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="./reactivity.global.js"></script>
+    <div id="app"></div>
+    <script>
+        // effct是副作用收集函数，如果此函数的依赖数据发生变化就会重新执行
+        // reactive将数据变成响应式
+        const {
+            effect,
+            reactive,
+        } = VueReactivity
+        const data = {
+            name: "xxx",
+            age: 22
+        }
+        const state = reactive(data)
+        const state2 = reactive(data)
+        console.log(state === state2)
+        // Vue3中的代理都是使用Proxy解决
+        // console.log(state) // Proxy对象
+        // effect函数会默认执行一次，对响应式数据进行取值
+        effect(()=>{
+            app.innerHTML = state.name + '今年' + state.age + '岁'
+        })
+        // // age变化会重新执行effect
+        // setTimeout(()=>{
+        //     state.age=22
+        // }, 1000)
+    </script>
+</body>
+
+</html>
