@@ -12,9 +12,9 @@ export function reactive(target) {
         return target
     }
     // 映射表，这是操作是直接代理同一个对象
-    let existingProsy = reactiveMap.get(target)
+    let existingProxy = reactiveMap.get(target)
     if (reactiveMap.has(target)) {
-        return existingProsy
+        return existingProxy
     }
     // 第一次普通对象代理通过new Proxy代理一次
     // 下一次传递的是proxy，我们就可以看一下他有没有代理过，如果有，则get方法的时候说明已经访问过
